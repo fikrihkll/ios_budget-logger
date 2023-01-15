@@ -13,6 +13,10 @@
 		F09A550B2969C32F00DF2D05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F09A550A2969C32F00DF2D05 /* Preview Assets.xcassets */; };
 		F09A550D2969C32F00DF2D05 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09A550C2969C32F00DF2D05 /* Persistence.swift */; };
 		F09A55102969C32F00DF2D05 /* BudgetLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F09A550E2969C32F00DF2D05 /* BudgetLog.xcdatamodeld */; };
+		F09A55172969C63200DF2D05 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09A55162969C63200DF2D05 /* HomeView.swift */; };
+		F09A551A296AA83700DF2D05 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09A5519296AA83700DF2D05 /* Log.swift */; };
+		F0BEF2EC2974530C005037D1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BEF2EB2974530C005037D1 /* HomeViewModel.swift */; };
+		F0BEF2EE29745A35005037D1 /* BudgetListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BEF2ED29745A35005037D1 /* BudgetListBottomSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +27,10 @@
 		F09A550A2969C32F00DF2D05 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F09A550C2969C32F00DF2D05 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		F09A550F2969C32F00DF2D05 /* BudgetLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BudgetLog.xcdatamodel; sourceTree = "<group>"; };
+		F09A55162969C63200DF2D05 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F09A5519296AA83700DF2D05 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		F0BEF2EB2974530C005037D1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F0BEF2ED29745A35005037D1 /* BudgetListBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetListBottomSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,12 +63,17 @@
 		F09A55022969C32C00DF2D05 /* BudgetLog */ = {
 			isa = PBXGroup;
 			children = (
+				F09A551B296AAAAD00DF2D05 /* util */,
+				F09A5518296AA82400DF2D05 /* model */,
 				F09A55032969C32C00DF2D05 /* BudgetLogApp.swift */,
 				F09A55052969C32C00DF2D05 /* ContentView.swift */,
 				F09A55072969C32F00DF2D05 /* Assets.xcassets */,
 				F09A550C2969C32F00DF2D05 /* Persistence.swift */,
 				F09A550E2969C32F00DF2D05 /* BudgetLog.xcdatamodeld */,
 				F09A55092969C32F00DF2D05 /* Preview Content */,
+				F09A55162969C63200DF2D05 /* HomeView.swift */,
+				F0BEF2EB2974530C005037D1 /* HomeViewModel.swift */,
+				F0BEF2ED29745A35005037D1 /* BudgetListBottomSheetView.swift */,
 			);
 			path = BudgetLog;
 			sourceTree = "<group>";
@@ -71,6 +84,21 @@
 				F09A550A2969C32F00DF2D05 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F09A5518296AA82400DF2D05 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F09A5519296AA83700DF2D05 /* Log.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		F09A551B296AAAAD00DF2D05 /* util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +173,11 @@
 			files = (
 				F09A550D2969C32F00DF2D05 /* Persistence.swift in Sources */,
 				F09A55062969C32C00DF2D05 /* ContentView.swift in Sources */,
+				F0BEF2EE29745A35005037D1 /* BudgetListBottomSheetView.swift in Sources */,
+				F0BEF2EC2974530C005037D1 /* HomeViewModel.swift in Sources */,
+				F09A551A296AA83700DF2D05 /* Log.swift in Sources */,
 				F09A55042969C32C00DF2D05 /* BudgetLogApp.swift in Sources */,
+				F09A55172969C63200DF2D05 /* HomeView.swift in Sources */,
 				F09A55102969C32F00DF2D05 /* BudgetLog.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,8 +313,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,8 +342,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
