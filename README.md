@@ -3,7 +3,7 @@
 Stack: 
 - SwiftUI
 - CoreData
-- MVVM Patter ✌🏻
+- MVVM Pattern ✌🏻
 
 Built with ♡  of course :)
 
