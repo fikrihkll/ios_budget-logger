@@ -5,6 +5,6 @@ Stack:
 - CoreData
 - MVVM Patter ✌🏻
 
-Built with ♡of course :)
+Built with ♡  of course :)
 
-Cheers
+Cheers,
