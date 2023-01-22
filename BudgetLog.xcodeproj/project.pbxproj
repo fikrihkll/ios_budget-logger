@@ -15,6 +15,8 @@
 		F09A55102969C32F00DF2D05 /* BudgetLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F09A550E2969C32F00DF2D05 /* BudgetLog.xcdatamodeld */; };
 		F09A55172969C63200DF2D05 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09A55162969C63200DF2D05 /* HomeView.swift */; };
 		F09A551A296AA83700DF2D05 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09A5519296AA83700DF2D05 /* Log.swift */; };
+		F09E03C4297D0C9400990FD0 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09E03C3297D0C9400990FD0 /* Budget.swift */; };
+		F09E03C6297D0DFB00990FD0 /* FormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09E03C5297D0DFB00990FD0 /* FormatterUtil.swift */; };
 		F0BEF2EC2974530C005037D1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BEF2EB2974530C005037D1 /* HomeViewModel.swift */; };
 		F0BEF2EE29745A35005037D1 /* BudgetListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BEF2ED29745A35005037D1 /* BudgetListBottomSheetView.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +31,8 @@
 		F09A550F2969C32F00DF2D05 /* BudgetLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BudgetLog.xcdatamodel; sourceTree = "<group>"; };
 		F09A55162969C63200DF2D05 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F09A5519296AA83700DF2D05 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		F09E03C3297D0C9400990FD0 /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
+		F09E03C5297D0DFB00990FD0 /* FormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterUtil.swift; sourceTree = "<group>"; };
 		F0BEF2EB2974530C005037D1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F0BEF2ED29745A35005037D1 /* BudgetListBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetListBottomSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +78,7 @@
 				F09A55162969C63200DF2D05 /* HomeView.swift */,
 				F0BEF2EB2974530C005037D1 /* HomeViewModel.swift */,
 				F0BEF2ED29745A35005037D1 /* BudgetListBottomSheetView.swift */,
+				F09E03C5297D0DFB00990FD0 /* FormatterUtil.swift */,
 			);
 			path = BudgetLog;
 			sourceTree = "<group>";
@@ -90,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				F09A5519296AA83700DF2D05 /* Log.swift */,
+				F09E03C3297D0C9400990FD0 /* Budget.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -176,8 +182,10 @@
 				F0BEF2EE29745A35005037D1 /* BudgetListBottomSheetView.swift in Sources */,
 				F0BEF2EC2974530C005037D1 /* HomeViewModel.swift in Sources */,
 				F09A551A296AA83700DF2D05 /* Log.swift in Sources */,
+				F09E03C4297D0C9400990FD0 /* Budget.swift in Sources */,
 				F09A55042969C32C00DF2D05 /* BudgetLogApp.swift in Sources */,
 				F09A55172969C63200DF2D05 /* HomeView.swift in Sources */,
+				F09E03C6297D0DFB00990FD0 /* FormatterUtil.swift in Sources */,
 				F09A55102969C32F00DF2D05 /* BudgetLog.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
