@@ -23,8 +23,8 @@ class HomeViewModel: ObservableObject {
         listExpense.append(log)
     }
     
-    func removeExpense(index: Int) {
-        listExpense.remove(at: index)
+    func removeExpense(log: Log) {
+        listExpense.removeAll { $0.id == log.id }
     }
     
 }

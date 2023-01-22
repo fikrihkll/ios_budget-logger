@@ -53,15 +53,13 @@ struct HomeView: View {
                         }
                     }
                     
-                    ForEach(viewModel.listExpense.indices, id: \.self) { index in
+                    ForEach(viewModel.listExpense) { item in
                         HStack {
                             LogItemView(
-                                log: viewModel.listExpense[index],
-                                index: index,
+                                log: item,
                                 isDeleting: self.isDeleting,
-                                onDeleteClicked: { (selectedIndex) in
-                                    deleteItems(index: selectedIndex)
-                                    print("HERE \(selectedIndex)")
+                                onDeleteClicked: { (log) in
+                                    viewModel.removeExpense(log: log)
                                 }
                             )
                         }
@@ -77,10 +75,6 @@ struct HomeView: View {
             .navigationTitle("Budget Log")
             .padding(.horizontal, 16.0)
         }
-    }
-    
-    private func deleteItems(index: Int) {
-        viewModel.removeExpense(index: index)
     }
     
     private func addExpense(
@@ -269,14 +263,12 @@ struct LogItemView: View {
     
     @State var log: Log
     private let formatter = NumberFormatter()
-    private var index: Int
     private var isDeleting: Bool = false
-    private var onDeleteClicked: (Int) -> Void
+    private var onDeleteClicked: (Log) -> Void
 
-    init(log: Log, index: Int, isDeleting: Bool, onDeleteClicked:  @escaping (Int) -> Void) {
+    init(log: Log, isDeleting: Bool, onDeleteClicked:  @escaping (Log) -> Void) {
         formatter.usesGroupingSeparator = true
         formatter.groupingSeparator = "."
-        self.index = index
         self.isDeleting = isDeleting
         self.onDeleteClicked = onDeleteClicked
         
@@ -291,14 +283,14 @@ struct LogItemView: View {
         HStack {
             if (isDeleting) {
                 Button(action: {
-                    self.onDeleteClicked(index)
+                    self.onDeleteClicked(log)
                 }) {
                     Image(systemName: "minus.circle.fill")
                 }
             }
             VStack(alignment: .leading) {
                 HStack {
-                    Text("Rp. \(formatter.string(from: NSNumber(value: log.nominal ?? 0.0)) ?? "")")
+                    Text("Rp. \(FormatterUtil.formatNominal(nominal: log.nominal ?? 0.0))")
                         .fontWeight(.bold)
                     Spacer()
                     Text(getDate(timeMilis: log.date ?? 0.0))

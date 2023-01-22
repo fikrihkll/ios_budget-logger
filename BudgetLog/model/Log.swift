@@ -10,9 +10,9 @@ import Foundation
 struct Log: Identifiable {
     
     let id: UUID?
-    let nominal: Double?
-    let description: String?
-    let date: Double?
-    let category: String?
+    var nominal: Double?
+    var description: String?
+    var date: Double?
+    var category: String?
     
 }
