@@ -29,7 +29,6 @@ struct BudgetListBottomSheetView: View {
                         text: $textBudgetNameController
                     )
                     .textFieldStyle(.roundedBorder)
-                    .keyboardType(.numberPad)
                     
                     Spacer()
                     Button(action: {}) {

@@ -255,7 +255,6 @@ struct HeaderView: View, HeaderAction {
                 text: $textBudgetNameController
             )
             .textFieldStyle(.roundedBorder)
-            .keyboardType(.numberPad)
         } else {
             Button(action: {
                 isListBudgetShown.toggle()
