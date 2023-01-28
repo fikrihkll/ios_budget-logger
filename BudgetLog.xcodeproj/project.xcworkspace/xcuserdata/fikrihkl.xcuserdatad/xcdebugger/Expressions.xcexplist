@@ -3,6 +3,9 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "HomeViewModel.getListExpence(budgetId:moc:):HomeViewModel.swift">
+      </ContextState>
+      <ContextState
          contextName = "HomeViewModel.removeExpense(log:):HomeViewModel.swift">
          <PersistentStrings>
             <PersistentString
@@ -10,6 +13,14 @@
             </PersistentString>
             <PersistentString
                value = "listExpense.removeAll { $0.id == log.id }">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BudgetListViewModel.getListBudget(moc:):BudgetListViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data.value(forKey: &quot;name&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

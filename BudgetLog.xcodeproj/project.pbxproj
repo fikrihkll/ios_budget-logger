@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F05704A529853E0000B5BBA1 /* BudgetListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05704A429853E0000B5BBA1 /* BudgetListViewModel.swift */; };
 		F09A55042969C32C00DF2D05 /* BudgetLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09A55032969C32C00DF2D05 /* BudgetLogApp.swift */; };
 		F09A55062969C32C00DF2D05 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09A55052969C32C00DF2D05 /* ContentView.swift */; };
 		F09A55082969C32F00DF2D05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F09A55072969C32F00DF2D05 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F05704A429853E0000B5BBA1 /* BudgetListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetListViewModel.swift; sourceTree = "<group>"; };
 		F09A55002969C32C00DF2D05 /* BudgetLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BudgetLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F09A55032969C32C00DF2D05 /* BudgetLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetLogApp.swift; sourceTree = "<group>"; };
 		F09A55052969C32C00DF2D05 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				F0BEF2EB2974530C005037D1 /* HomeViewModel.swift */,
 				F0BEF2ED29745A35005037D1 /* BudgetListBottomSheetView.swift */,
 				F09E03C5297D0DFB00990FD0 /* FormatterUtil.swift */,
+				F05704A429853E0000B5BBA1 /* BudgetListViewModel.swift */,
 			);
 			path = BudgetLog;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				F09A55042969C32C00DF2D05 /* BudgetLogApp.swift in Sources */,
 				F09A55172969C63200DF2D05 /* HomeView.swift in Sources */,
 				F09E03C6297D0DFB00990FD0 /* FormatterUtil.swift in Sources */,
+				F05704A529853E0000B5BBA1 /* BudgetListViewModel.swift in Sources */,
 				F09A55102969C32F00DF2D05 /* BudgetLog.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,6 +327,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -352,6 +357,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -13,12 +13,8 @@ struct BudgetListBottomSheetView: View {
     @State private var isAdding = false
     @State private var textBudgetNameController: String = ""
     private var onItemClicked: (UUID) -> Void
-    @State private var dummyBudgetList = [
-        Budget(id: UUID(), name: "Singapore", nominal: 9000000.0),
-        Budget(id: UUID(), name: "Italy", nominal: 320000000.0),
-        Budget(id: UUID(), name: "Spain", nominal: 120000000.0),
-        Budget(id: UUID(), name: "Norway", nominal: 90000000.0)
-    ]
+    @State private var dummyBudgetList = []
+    @StateObject private var viewModel = BudgetListViewModel()
     
     init(onItemClicked: @escaping (UUID) -> Void) {
         self.onItemClicked = onItemClicked
@@ -47,7 +43,7 @@ struct BudgetListBottomSheetView: View {
                     )
                     .highPriorityGesture(
                         TapGesture().onEnded { _ in
-                            onItemClicked(UUID())
+                            onItemClicked(viewModel.addNewBudget(name: textBudgetNameController, moc: viewContext) ?? UUID())
                         })
                 }
                 .padding(EdgeInsets(top: 32.0, leading: 24.0, bottom: 16.0, trailing: 24.0))
@@ -67,10 +63,10 @@ struct BudgetListBottomSheetView: View {
             Spacer(minLength: 16.0)
         
             List {
-                ForEach(dummyBudgetList) { (item) in
+                ForEach(viewModel.listBudget) { (item) in
                     BudgetItemView(item: item, onItemClicked: self.onItemClicked)
                         .swipeActions(allowsFullSwipe: false) {
-                            Button (action: { self.dummyBudgetList.removeAll{ $0.id == item.id } }) {
+                            Button (action: { viewModel.removeBudget(id: item.id, moc: viewContext) }) {
                                 Label("Delete", systemImage: "trash.circle.fill")
                           }
                           .tint(.blue)
@@ -78,6 +74,8 @@ struct BudgetListBottomSheetView: View {
                 }
                 .listRowBackground(Color.clear)
                 
+            }.onAppear() {
+                viewModel.getListBudget(moc: self.viewContext)
             }
         }.background(Color.gray.opacity(0.1))
     }
