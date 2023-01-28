@@ -9,12 +9,15 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @Environment(\.managedObjectContext) var moc
+    
+    @State private var budgetId: UUID? = nil
     @State private var isInserting = true
     @State private var isDeleting = false
     @State private var isSelected = false
     
     @StateObject private var viewModel = HomeViewModel()
-    
+    private var headerController = HeaderController()
     
     var body: some View {
         NavigationView {
@@ -23,7 +26,18 @@ struct HomeView: View {
                 VStack(alignment: .leading) {
                     Spacer()
                         .frame(height: 16.0)
-                    HeaderView()
+                    HeaderView(
+                        viewModel: viewModel,
+                        onBudgetIdChanged: { (newBudgetId) in
+                            viewModel.setBudgetId(newBudgetId: newBudgetId, moc: moc)
+                            headerController.notifyBudgetInfoChanged()
+                        },
+                        controller: headerController
+                    ).onAppear(perform: {
+                        if (budgetId == nil) {
+                            headerController.requestOpenListBudget()
+                        }
+                    })
                     
                     Spacer()
                         .frame(height: 32.0)
@@ -59,14 +73,11 @@ struct HomeView: View {
                                 log: item,
                                 isDeleting: self.isDeleting,
                                 onDeleteClicked: { (log) in
-                                    viewModel.removeExpense(log: log)
+                                    viewModel.removeExpense(log: log, moc: moc)
                                 }
                             )
                         }
-                    }
-                    
-                    
-                    
+                    }    
                     
                     Spacer()
                 }
@@ -75,6 +86,7 @@ struct HomeView: View {
             .navigationTitle("Budget Log")
             .padding(.horizontal, 16.0)
         }
+        
     }
     
     private func addExpense(
@@ -84,8 +96,10 @@ struct HomeView: View {
     ) {
         if !category.isEmpty {
             viewModel.addExpense(
+                moc: self.moc,
                 log: Log(
                     id: UUID(),
+                    budgetId: viewModel.budgetId,
                     nominal: nominal,
                     description: desc,
                     date: Date().timeIntervalSince1970,
@@ -198,12 +212,41 @@ struct CategoryExpenseView: View {
     
 }
 
-struct HeaderView: View {
+struct HeaderView: View, HeaderAction {
+    
+    @Environment(\.managedObjectContext) var moc
     
     @State private var isEditing = false
     @State private var textMaxBudgetController: String = ""
     @State private var textBudgetNameController: String = ""
     @State private var isListBudgetShown = false
+    private var onBudgetIdChanged: ((UUID) -> Void)
+    private var controller: HeaderController?
+    private var viewModel: HomeViewModel
+    
+    init(
+        viewModel: HomeViewModel,
+        onBudgetIdChanged: @escaping ((UUID) -> Void),
+        controller: HeaderController? = nil
+    ) {
+        self.viewModel = viewModel
+        self.onBudgetIdChanged = onBudgetIdChanged
+        if controller != nil {
+            self.controller = controller!
+            self.controller?.setListenerReference(actionListener: self)
+        }
+        if (viewModel.budgetInfo != nil) {
+            _textBudgetNameController = State(initialValue: viewModel.budgetInfo?.name ?? "")
+            _textMaxBudgetController = State(initialValue: String(format: "%.1f", viewModel.budgetInfo?.nominal ?? "0.0"))
+        }
+    }
+    
+    func onBudgetInfoChanged() {
+        if (viewModel.budgetInfo != nil) {
+            textBudgetNameController = viewModel.budgetInfo!.name
+            textMaxBudgetController = String(format: "%.1f", viewModel.budgetInfo!.nominal)
+        }
+    }
     
     var body: some View {
         if isEditing {
@@ -218,7 +261,7 @@ struct HeaderView: View {
                 isListBudgetShown.toggle()
             }) {
                 Text(
-                    "Italy"
+                    viewModel.budgetInfo?.name ?? "-"
                 ).font(.title2).fontWeight(.bold)
                 Image(systemName: "chevron.up.chevron.down")
             }
@@ -227,12 +270,19 @@ struct HeaderView: View {
                 BudgetListBottomSheetView(
                     onItemClicked: { (item) in
                         print("clicked \(item)")
+                        onBudgetIdChanged(item)
                         isListBudgetShown.toggle()
                     }
                 )
                 
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
+            }
+            .onAppear() {
+                if controller?.isRequestingForShowingListBudget == true {
+                    controller?.isRequestingForShowingListBudget = false
+                    isListBudgetShown.toggle()
+                }
             }
         }
         Divider()
@@ -246,16 +296,42 @@ struct HeaderView: View {
                 .keyboardType(.numberPad)
             } else {
                 Text(
-                    "Rp. 14,000,000"
+                    "Rp. \(FormatterUtil.formatNominal(nominal: viewModel.budgetInfo?.nominal ?? 0.0))"
                 ).font(.title3)
             }
             Spacer()
             EditButton()
                 .simultaneousGesture(TapGesture().onEnded({
+                    viewModel.editBudget(budgetId: viewModel.budgetId!, newName: textBudgetNameController, newNominal: Double(textMaxBudgetController) ?? 0.0, moc: moc)
                     isEditing.toggle()
                 }))
         }
     }
+    
+}
+
+class HeaderController {
+    
+    private var actionListener: HeaderAction? = nil
+    var isRequestingForShowingListBudget = false
+    
+    func requestOpenListBudget() {
+        isRequestingForShowingListBudget = true
+    }
+    
+    func notifyBudgetInfoChanged() {
+        actionListener?.onBudgetInfoChanged()
+    }
+    
+    func setListenerReference(actionListener: HeaderAction) {
+        self.actionListener = actionListener
+    }
+    
+}
+
+protocol HeaderAction {
+    
+    func onBudgetInfoChanged()
     
 }
 
