@@ -6,6 +6,8 @@ Stack:
 - MVVM Pattern ✌🏻
 
 Built with ♡  of course :)
-♡ is the key broo
 
 Cheers,
+
+### Preview
+<img width="250px" src="https://user-images.githubusercontent.com/57880863/215319866-71699df2-2cae-4fbc-b182-6c5eebfa77cb.gif"/>
