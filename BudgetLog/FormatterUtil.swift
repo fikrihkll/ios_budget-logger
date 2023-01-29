@@ -17,7 +17,9 @@ class FormatterUtil {
     
     static func formatNominal(nominal: Double) -> String {
         formatter.usesGroupingSeparator = true
+        formatter.numberStyle = .decimal
         formatter.groupingSeparator = "."
+        formatter.maximumFractionDigits = 2
         return formatter.string(from: NSNumber(value: nominal)) ?? ""
     }
     
