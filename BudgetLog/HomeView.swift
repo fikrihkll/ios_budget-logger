@@ -30,7 +30,6 @@ struct HomeView: View {
                         viewModel: viewModel,
                         onBudgetIdChanged: { (newBudgetId) in
                             viewModel.setBudgetId(newBudgetId: newBudgetId, moc: moc)
-                            headerController.notifyBudgetInfoChanged()
                         },
                         controller: headerController
                     ).onAppear(perform: {
@@ -115,7 +114,7 @@ struct InputExpenseView: View {
     @State private var textBudgetController: String = ""
     @State private var textDescController: String = ""
     @State private var selectedCategory: String = ""
-    private var listCategory = ["Meal", "Food", "Drink", "Transport", "Subscription"]
+    private var listCategory = ["Meal", "Food", "Drink", "Transport", "Ticket", "Shopping", "Tools", "Other"]
     private var onSavePressed: ((nominal: Double, desc: String, category: String)) -> Void
     
     init(onSavePressed: @escaping ((nominal: Double, desc: String, category: String)) -> Void) {
@@ -135,25 +134,23 @@ struct InputExpenseView: View {
             text: $textDescController
         ).textFieldStyle(.roundedBorder)
         
-        HStack {
-            
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(listCategory.indices, id: \.self) { index in
-                        CategoryExpenseView(
-                            title: listCategory[index],
-                            index: index,
-                            isSelected: selectedCategory == listCategory[index],
-                            onItemClicked: { (selectedIndex) in
-                                self.selectedCategory = listCategory[selectedIndex]
-                            }
-                        )
-                    }
+        ScrollView(.horizontal) {
+            HStack {
+                ForEach(listCategory.indices, id: \.self) { index in
+                    CategoryExpenseView(
+                        title: listCategory[index],
+                        index: index,
+                        isSelected: selectedCategory == listCategory[index],
+                        onItemClicked: { (selectedIndex) in
+                            self.selectedCategory = listCategory[selectedIndex]
+                        }
+                    )
                 }
             }
-            
+        }
+        Spacer(minLength: 16.0)
+        HStack {
             Spacer()
-            
             Button(action: {
                 self.onSavePressed(
                     (
@@ -196,7 +193,7 @@ struct CategoryExpenseView: View {
                 action: {
                     self.onItemClicked(index)
             }) {
-                Image(systemName: "cup.and.saucer.fill")
+                Image(systemName: "creditcard.circle.fill")
                     .renderingMode(.template)
                     .foregroundColor(.white)
                 Text(title)
@@ -237,14 +234,7 @@ struct HeaderView: View, HeaderAction {
         }
         if (viewModel.budgetInfo != nil) {
             _textBudgetNameController = State(initialValue: viewModel.budgetInfo?.name ?? "")
-            _textMaxBudgetController = State(initialValue: String(format: "%.1f", viewModel.budgetInfo?.nominal ?? "0.0"))
-        }
-    }
-    
-    func onBudgetInfoChanged() {
-        if (viewModel.budgetInfo != nil) {
-            textBudgetNameController = viewModel.budgetInfo!.name
-            textMaxBudgetController = String(format: "%.1f", viewModel.budgetInfo!.nominal)
+            _textMaxBudgetController = State(initialValue: String(format: "%.1f", viewModel.budgetInfo?.nominal ?? "0"))
         }
     }
     
@@ -301,9 +291,29 @@ struct HeaderView: View, HeaderAction {
             Spacer()
             EditButton()
                 .simultaneousGesture(TapGesture().onEnded({
-                    viewModel.editBudget(budgetId: viewModel.budgetId!, newName: textBudgetNameController, newNominal: Double(textMaxBudgetController) ?? 0.0, moc: moc)
+                    if (isEditing) {
+                        viewModel.editBudget(budgetId: viewModel.budgetId!, newName: textBudgetNameController, newNominal: Double(textMaxBudgetController) ?? 0.0, moc: moc)
+                    } else {
+                        if (viewModel.budgetInfo != nil) {
+                            textBudgetNameController = viewModel.budgetInfo!.name
+                            textMaxBudgetController = String(format: "%.1f", viewModel.budgetInfo!.nominal)
+                        }
+                    }
                     isEditing.toggle()
                 }))
+        }
+        Spacer(minLength: 8.0)
+        HStack {
+            Text(
+                "Rp. \(FormatterUtil.formatNominal(nominal: ((viewModel.budgetInfo?.nominal ?? 0.0) - viewModel.sumOfExpense)))"
+            ).font(.caption).foregroundColor(.blue)
+            Text("balance left").font(.caption).foregroundColor(.blue)
+        }
+        HStack {
+            Text(
+                "Rp. \(FormatterUtil.formatNominal(nominal: viewModel.sumOfExpense))"
+            ).font(.caption).foregroundColor(.gray)
+            Text("used").font(.caption).foregroundColor(.gray)
         }
     }
     
@@ -318,10 +328,6 @@ class HeaderController {
         isRequestingForShowingListBudget = true
     }
     
-    func notifyBudgetInfoChanged() {
-        actionListener?.onBudgetInfoChanged()
-    }
-    
     func setListenerReference(actionListener: HeaderAction) {
         self.actionListener = actionListener
     }
@@ -329,8 +335,6 @@ class HeaderController {
 }
 
 protocol HeaderAction {
-    
-    func onBudgetInfoChanged()
     
 }
 
